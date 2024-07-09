@@ -50,15 +50,15 @@ const sendMessage = async (header, date, link, phoneNumber) => {
                         parameters: [
                             {
                                 type: 'text',
-                                text: `${link}`
-                            },
-                            {
-                                type: 'text',
                                 text: `${header}`
                             },
                             {
                                 type: 'text',
                                 text: `${date}`
+                            },
+                            {
+                                type: 'text',
+                                text: `${link}`
                             }
                         ]
                     }
