@@ -69,7 +69,6 @@ const Metinler = async (articledizielemanlari) => {
         }
 
         const ArticleText = paragraphs.join("\n");
-        console.log(ArticleText);
 
         await browser.close();
         return ArticleText;
