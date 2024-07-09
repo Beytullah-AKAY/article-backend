@@ -4,7 +4,7 @@ const identity = require("./identity");
 const makaledinle = async (req, res) => {
   try {
     const Identity = req.query.Identity;
-    const articleid = Number(req.query.article_id)
+    const articleid = Number(req.query.articleId)
     let user, findmakale, updateFindMakale
 
     //  console.log(Identity, articleid, "burdasın")

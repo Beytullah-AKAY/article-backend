@@ -14,8 +14,8 @@ başla().then(() => {
 
     // Başlangıç işlevleri tamamlandıktan sonra cron işlemi başlatılır
 
-    const mesaj = new cron.CronJob('0 0 9-22 * * *', async () => {
-        //const mesaj = new cron.CronJob('*/1 9-20 * * *', async () => {
+    //const mesaj = new cron.CronJob('0 0 9-22 * * *', async () => {
+    const mesaj = new cron.CronJob('*/1 9-20 * * *', async () => {
         await TextsToBeSent();
     }, null, true, 'Europe/Istanbul');
 
