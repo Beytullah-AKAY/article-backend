@@ -20,7 +20,22 @@ const Metinler = async (articledizielemanlari) => {
         while (retries < maxRetries) {
             page = await browser.newPage();
 
-            await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
+            // Dil ve konum ayarları
+            await page.setExtraHTTPHeaders({
+                'Accept-Language': 'tr-TR,tr;q=0.9'
+            });
+
+            await page.evaluateOnNewDocument(() => {
+                Object.defineProperty(navigator, 'language', {
+                    get: function () { return 'tr-TR'; }
+                });
+                Object.defineProperty(navigator, 'languages', {
+                    get: function () { return ['tr-TR', 'tr']; }
+                });
+            });
+
+            // User-Agent ayarı
+            await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 (Türkiye)');
 
             try {
                 await page.goto(articledizielemanlari, { timeout: 30000, waitUntil: 'networkidle0' });
@@ -44,6 +59,9 @@ const Metinler = async (articledizielemanlari) => {
             return pTags.map((tag) => tag.innerText);
         });
 
+        // İstenmeyen içeriği filtrele
+        paragraphs = paragraphs.filter(p => !p.includes("Your personal data") && !p.includes("Cookie duration"));
+
         // Son altı satırı sil
         paragraphs.splice(paragraphs.length - 6, 6);
 
@@ -54,6 +72,7 @@ const Metinler = async (articledizielemanlari) => {
         return ArticleText;
     } catch (error) {
         console.log(error);
+        return ""; // Hata durumunda boş string döndür
     }
 }
 
