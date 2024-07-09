@@ -78,7 +78,7 @@ const DBarticles = async () => {
             // Birinci dizideki URL'leri filtrele
             const UpDateArticle = linksFirst30.filter(item => !DbUrlSet.has(item.url));
 
-            console.log(UpDateArticle)
+            //  console.log(UpDateArticle)
             const UpDateArticleReverse = UpDateArticle.reverse()
 
             if (UpDateArticle.length <= 15 && UpDateArticle.length !== 0) {
