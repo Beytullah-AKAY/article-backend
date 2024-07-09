@@ -40,6 +40,7 @@ const Metinler = async (articledizielemanlari) => {
 
         paragraphs.splice(paragraphs.length - 6, 6);
         const ArticleText = Object.values(paragraphs).join("\n");
+        console.log(ArticleText)
 
         await browser.close();
         return ArticleText;
