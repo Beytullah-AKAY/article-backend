@@ -8,10 +8,10 @@ const makaledinle = async (req, res) => {
     let user, findmakale, updateFindMakale
 
     //  console.log(Identity, articleid, "burdasın")
-
     if (!Identity || Identity === null || !articleid || articleid === null) {
+      let error
       console.log("Geçersiz kimlik veya makale bulunamadı")
-      return res.status(401).json({ "Geçersiz Identity" });
+      return res.status(401).json({ error: "Geçersiz Identity" });
     } else {
       try {
         user = await database.user.findUnique({
