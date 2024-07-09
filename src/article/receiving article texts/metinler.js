@@ -62,8 +62,11 @@ const Metinler = async (articledizielemanlari) => {
         // İstenmeyen içeriği filtrele
         paragraphs = paragraphs.filter(p => !p.includes("Your personal data") && !p.includes("Cookie duration"));
 
-        // Son altı satırı sil
-        paragraphs.splice(paragraphs.length - 6, 6);
+        // "Duyurulardan haberdar olma" cümlesini bul ve sonrası içeriği sil
+        const endIndex = paragraphs.findIndex(p => p.includes("Duyurulardan haberdar olma"));
+        if (endIndex !== -1) {
+            paragraphs = paragraphs.slice(0, endIndex);
+        }
 
         const ArticleText = paragraphs.join("\n");
         console.log(ArticleText);
