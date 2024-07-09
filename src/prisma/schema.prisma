@@ -1,0 +1,38 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int       @id @unique @default(autoincrement())
+  name       String
+  surname    String
+  email      String    @unique
+  tel        String     @unique
+  meslek     String
+  Identity   String?   @unique
+  clickers   Clicker[] @relation("UserClickers") // User modelindeki karşılık ilişki alanı
+}
+
+    model Article {
+    id         Int       @id @unique @default(autoincrement())
+    header     String
+    date       DateTime
+    url        String    @unique
+    text       String?
+    clicks     Int       @default(0)
+    clickers   Clicker[] // Makaleye yapılan tıklamalar
+    }
+
+model Clicker {
+  id            Int       @id @unique @default(autoincrement())
+  user          User      @relation("UserClickers", fields: [userIdentity], references: [Identity])
+  userIdentity  String    // User modelindeki Identity alanı ile ilişkilendirildi
+  article       Article   @relation(fields: [articleId], references: [id])
+  articleId     Int
+  createdAt     DateTime  @default(now()) // Tıklama oluşturulma zamanı
+}
