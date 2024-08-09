@@ -3,6 +3,7 @@ const database = require("../../utils/database");
 const Metinler = require('../receiving article texts/metinler');
 
 const DBarticles = async () => {
+    console.log("db başladı")
     let UpDateDate
     let i = 1
     try {

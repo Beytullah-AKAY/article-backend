@@ -16,7 +16,7 @@ başla().then(() => {
 
     const mesaj = new cron.CronJob('0 0 9-22 * * *', async () => {
         //const mesaj = new cron.CronJob('*/1 9-20 * * *', async () => {
-        await TextsToBeSent();
+        // await TextsToBeSent();
     }, null, true, 'Europe/Istanbul');
 
     mesaj.start();
